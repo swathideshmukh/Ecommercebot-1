@@ -1,72 +1,87 @@
-# 🛍️ WhatsApp E-commerce Chatbot
+# 🛍️ WhatsApp E-commerce Bot
 
-A full-stack WhatsApp chatbot built using **Node.js, Express, MongoDB, and WhatsApp Cloud API** that allows users to browse products, add items to cart, and place orders directly via WhatsApp.
+A full-featured **WhatsApp shopping chatbot** built using **Node.js, Express, MongoDB, and WhatsApp Cloud API**, enabling users to browse products, add to cart, and place orders directly from WhatsApp.
 
 ---
 
 ## 🚀 Features
 
-### 🛒 Shopping Experience
+### 🛒 Shopping
 
-* Browse products by category
-* View product details with images
-* Add to cart with interactive buttons
-* Clothing flow with size, color, and quantity selection
-* Pagination (View More products)
+* Browse categories & products
+* View product images and details
+* Add to cart using interactive buttons
+* Clothing flow with:
 
-### 💬 Chatbot Features
+  * Size selection
+  * Color selection
+  * Quantity selection
 
-* Interactive menus (buttons + lists)
-* Smart routing of user messages
+### 💬 Chatbot
+
+* Interactive WhatsApp UI (buttons & lists)
+* Smart message routing
+* Pagination ("View More")
 * Human agent handoff support
-* Cart management (add/remove/view)
 
 ### 💳 Checkout
 
-* Order placement
-* Payment link generation (Razorpay integration ready)
+* Cart management
+* Order creation
+* Razorpay payment integration (webhook ready)
 
 ---
 
 ## 🧠 Tech Stack
 
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB (Atlas)
-* **API:** WhatsApp Cloud API
-* **Architecture:** MVC (Controller, Repository, Services)
+* **Backend:** Node.js + Express
+* **Database:** MongoDB (Mongoose)
+* **Messaging:** WhatsApp Cloud API
+* **Architecture:** MVC + Service Layer
 
 ---
 
 ## 📁 Project Structure
 
-```id="projstruct"
-Ecommercebot/
-│
-├── controllers/
-│   └── chatController.js
-│
-├── repositories/
-│   └── productRepository.js
-│
-├── services/
-│   ├── whatsappService.js
-│   ├── cartService.js
-│   └── orderService.js
-│
-├── models/
-│   ├── Product.js
-│   ├── Category.js
-│   └── Cart.js
+```id="structure"
+ECOMMERCEBOT/
 │
 ├── config/
 │   └── mongodb.js
 │
+├── controllers/
+│   └── chatController.js
+│
+├── models/
+│   ├── Cart.js
+│   ├── Category.js
+│   ├── Order.js
+│   ├── Product.js
+│   └── User.js
+│
+├── repositories/
+│   ├── cartRepository.js
+│   ├── orderRepository.js
+│   └── productRepository.js
+│
 ├── routes/
-│   └── webhook.js
+│   ├── webhook.js
+│   └── razorpayWebhook.js
+│
+├── services/
+│   ├── cartService.js
+│   ├── orderService.js
+│   ├── razorpayService.js
+│   └── whatsappService.js
+│
+├── utils/
+│   └── formatters.js
 │
 ├── seed.js
 ├── server.js
-└── .env
+├── package.json
+├── .env
+└── TODO.md
 ```
 
 ---
@@ -76,8 +91,8 @@ Ecommercebot/
 ### 1️⃣ Clone Repository
 
 ```bash id="clone"
-git clone https://github.com/your-username/whatsapp-ecommerce.git
-cd whatsapp-ecommerce
+git clone https://github.com/your-username/whatsapp-ecommerce-bot.git
+cd whatsapp-ecommerce-bot
 ```
 
 ---
@@ -90,7 +105,7 @@ npm install
 
 ---
 
-### 3️⃣ Configure Environment Variables
+### 3️⃣ Setup Environment Variables
 
 Create `.env` file:
 
@@ -101,8 +116,10 @@ MONGO_URI=your_mongodb_atlas_url
 
 ACCESS_TOKEN=your_whatsapp_access_token
 PHONE_NUMBER_ID=your_phone_number_id
-
 VERIFY_TOKEN=your_verify_token
+
+RAZORPAY_KEY_ID=your_key
+RAZORPAY_KEY_SECRET=your_secret
 ```
 
 ---
@@ -115,7 +132,7 @@ node seed.js
 
 ---
 
-### 5️⃣ Run Server
+### 5️⃣ Start Server
 
 ```bash id="run"
 node server.js
@@ -123,100 +140,99 @@ node server.js
 
 ---
 
-## 🔗 Webhook Setup
+## 🔗 Webhook Setup (WhatsApp)
 
 1. Go to Meta Developer Dashboard
-2. Add webhook URL:
+2. Configure webhook:
 
-```
+```id="webhook"
 https://your-domain.com/webhook
 ```
 
 3. Verify using `VERIFY_TOKEN`
-4. Subscribe only to:
+4. Subscribe ONLY to:
 
-```
+```id="subs"
 messages
 ```
 
 ---
 
-## 📱 WhatsApp Bot Flow
+## 📱 User Flow
 
 ```id="flow"
-User → Menu
-     → Browse Categories
-     → Select Product
-     → Add to Cart
-     → Checkout
-     → Payment Link
+Hi → Menu
+   → Browse Categories
+   → Select Product
+   → Add to Cart
+   → Checkout
+   → Payment Link
 ```
 
 ---
 
 ## 👩‍💼 Human Agent Support
 
-Users can switch to human support:
-
-* Click **"Talk to Agent"**
+* User clicks **"Talk to Agent"**
 * Bot pauses responses
-* Agent replies manually or via dashboard
+* Agent handles conversation
 * User types `back` to return to bot
 
 ---
 
 ## ⚠️ Limitations
 
-* WhatsApp Cloud API does NOT support:
+* WhatsApp does NOT support:
 
-  * ❌ Horizontal scrolling UI
-  * ❌ True product grids
+  * ❌ Product grid UI
+  * ❌ Horizontal scroll (carousel without approval)
 
-* Catalog-like experience is simulated using:
+* Implemented workaround:
 
-  * Images + Buttons
+  * ✅ Image + buttons catalog style
 
 ---
 
 ## 🔮 Future Enhancements
 
-* WhatsApp Commerce Catalog API integration
-* Admin dashboard for live chat
-* AI product recommendations
+* WhatsApp Catalog API integration
+* Admin dashboard (live chat)
+* AI recommendations
 * Order tracking system
-* Payment webhook verification
+* Inventory management
 
 ---
 
 ## 🧪 Testing
 
-Use WhatsApp sandbox or your registered number:
+Send messages:
 
 ```id="test"
-Hi → Menu → Browse → Add → Checkout
+Hi
+Menu
+Browse
 ```
 
 ---
 
-## 📌 Important Notes
+## 📌 Notes
 
-* Ensure MongoDB Atlas IP is whitelisted
-* Use HTTPS for webhook in production
-* Keep access tokens secure
+* Use HTTPS for production webhook
+* Keep tokens secure
+* Ensure MongoDB Atlas IP whitelist
 
 ---
 
 ## 👨‍💻 Author
 
-Swathi Deshmukh
-ISE 5th Semester
-Full Stack + AI Enthusiast
+**Swathi Deshmukh**
+ Full Stack Developer
 
 ---
 
-## ⭐ Contribute
+## ⭐ Contribution
 
-Feel free to fork this repo and improve features!
+Feel free to fork and improve this project!
 
 ---
 
