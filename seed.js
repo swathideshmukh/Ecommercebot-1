@@ -19,172 +19,491 @@ const categoriesData = [
 ];
 
 const productsData = [
-  // Shoes
-  { productId: "SHOE001", categoryName: "Shoes", name: "Urban Runner Sneakers", price: 2499, description: "Lightweight sneakers for daily use.", imageUrl: "https://picsum.photos/seed/shoe001/600/400" },
-  { productId: "SHOE002", categoryName: "Shoes", name: "Classic White Trainers", price: 2999, description: "Minimal white trainers for casual wear.", imageUrl: "https://picsum.photos/seed/shoe002/600/400" },
-  { productId: "SHOE003", categoryName: "Shoes", name: "Black Sports Shoes", price: 1999, description: "Comfortable sports shoes for walking and gym.", imageUrl: "https://picsum.photos/seed/shoe003/600/400" },
-  { productId: "SHOE004", categoryName: "Shoes", name: "Brown Formal Shoes", price: 3499, description: "Premium formal shoes for office wear.", imageUrl: "https://picsum.photos/seed/shoe004/600/400" },
-  { productId: "SHOE005", categoryName: "Shoes", name: "Slip-On Loafers", price: 1799, description: "Easy slip-on loafers for everyday style.", imageUrl: "https://picsum.photos/seed/shoe005/600/400" },
-  { productId: "SHOE006", categoryName: "Shoes", name: "Running Pro Shoes", price: 4299, description: "High-grip running shoes with soft cushioning.", imageUrl: "https://picsum.photos/seed/shoe006/600/400" },
-  { productId: "SHOE007", categoryName: "Shoes", name: "Canvas Casual Shoes", price: 1299, description: "Trendy canvas shoes for college and casual use.", imageUrl: "https://picsum.photos/seed/shoe007/600/400" },
 
-  // Clothing
-  { productId: "CLTH001", categoryName: "Clothing", name: "Oversized Cotton T-Shirt", price: 799, description: "Premium cotton oversized T-shirt.", imageUrl: "https://picsum.photos/seed/clth001/600/400", gender: "Men", clothingType: "T-Shirts", size: "L", color: "White" },
-  { productId: "CLTH002", categoryName: "Clothing", name: "Slim Fit Denim Jacket", price: 2199, description: "Stylish denim jacket for everyday outfits.", imageUrl: "https://picsum.photos/seed/clth002/600/400", gender: "Men", clothingType: "Jackets", size: "M", color: "Blue" },
-  { productId: "CLTH003", categoryName: "Clothing", name: "Formal White Shirt", price: 999, description: "Classic white shirt for office and events.", imageUrl: "https://picsum.photos/seed/clth003/600/400", gender: "Men", clothingType: "Shirts", size: "M", color: "White" },
-  { productId: "CLTH004", categoryName: "Clothing", name: "Black Hoodie", price: 1499, description: "Warm hoodie with soft fabric.", imageUrl: "https://picsum.photos/seed/clth004/600/400", gender: "Men", clothingType: "Hoodies", size: "L", color: "Black" },
-  { productId: "CLTH005", categoryName: "Clothing", name: "Blue Jeans", price: 1799, description: "Comfort fit blue denim jeans.", imageUrl: "https://picsum.photos/seed/clth005/600/400", gender: "Men", clothingType: "Jeans", size: "32", color: "Blue" },
-  { productId: "CLTH006", categoryName: "Clothing", name: "Printed Kurti", price: 1299, description: "Elegant printed kurti for daily wear.", imageUrl: "https://picsum.photos/seed/clth006/600/400", gender: "Women", clothingType: "Kurtis", size: "M", color: "Multicolor" },
-  { productId: "CLTH007", categoryName: "Clothing", name: "Cotton Shorts", price: 699, description: "Comfortable cotton shorts for summer.", imageUrl: "https://picsum.photos/seed/clth007/600/400", gender: "Men", clothingType: "Shorts", size: "M", color: "Grey" },
+  // ─── Shoes ───────────────────────────────────────────────────────────────────
+  {
+    productId: "SHOE001", categoryName: "Shoes",
+    name: "Urban Runner Sneakers", price: 2499,
+    description: "Lightweight mesh sneakers built for daily city use. Cushioned sole for all-day comfort.",
+    imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80"
+  },
+  {
+    productId: "SHOE002", categoryName: "Shoes",
+    name: "Classic White Trainers", price: 2999,
+    description: "Minimalist white leather trainers with a clean profile. Pairs with everything.",
+    imageUrl: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=800&q=80"
+  },
+  {
+    productId: "SHOE003", categoryName: "Shoes",
+    name: "Black Sports Shoes", price: 1999,
+    description: "Durable black sports shoes with anti-slip sole. Ideal for gym and outdoor workouts.",
+    imageUrl: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80"
+  },
+  {
+    productId: "SHOE004", categoryName: "Shoes",
+    name: "Hiking Boots", price: 3999,
+    description: "Waterproof ankle-high hiking boots with rugged grip sole. Built for tough terrain.",
+    imageUrl: "https://images.unsplash.com/photo-1520219306100-ec4afeeefe58?w=800&q=80"
+  },
+  {
+    productId: "SHOE005", categoryName: "Shoes",
+    name: "Slip-On Loafers", price: 1799,
+    description: "Premium suede slip-on loafers. Effortlessly stylish for casual and semi-formal occasions.",
+    imageUrl: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=800&q=80"
+  },
+  {
+    productId: "SHOE006", categoryName: "Shoes",
+    name: "Women's Heeled Sandals", price: 2199,
+    description: "Elegant block-heeled sandals with ankle strap. Perfect for parties and evenings out.",
+    imageUrl: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&q=80"
+  },
+  {
+    productId: "SHOE007", categoryName: "Shoes",
+    name: "Canvas Espadrilles", price: 1299,
+    description: "Lightweight canvas espadrilles with jute sole. Breezy summer footwear.",
+    imageUrl: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800&q=80"
+  },
 
-  // Cooking Utensils
-  { productId: "COOK001", categoryName: "Cooking Utensils", name: "Non-Stick Fry Pan", price: 899, description: "Durable non-stick pan for everyday cooking.", imageUrl: "https://picsum.photos/seed/cook001/600/400" },
-  { productId: "COOK002", categoryName: "Cooking Utensils", name: "Steel Pressure Cooker", price: 2499, description: "5L stainless steel pressure cooker.", imageUrl: "https://picsum.photos/seed/cook002/600/400" },
-  { productId: "COOK003", categoryName: "Cooking Utensils", name: "Kitchen Knife Set", price: 1199, description: "Sharp stainless steel knife set.", imageUrl: "https://picsum.photos/seed/cook003/600/400" },
-  { productId: "COOK004", categoryName: "Cooking Utensils", name: "Wooden Spatula Set", price: 399, description: "Eco-friendly wooden spatulas.", imageUrl: "https://picsum.photos/seed/cook004/600/400" },
-  { productId: "COOK005", categoryName: "Cooking Utensils", name: "Mixing Bowl Set", price: 799, description: "Multi-size mixing bowls for kitchen use.", imageUrl: "https://picsum.photos/seed/cook005/600/400" },
-  { productId: "COOK006", categoryName: "Cooking Utensils", name: "Steel Tawa", price: 999, description: "Heavy-duty tawa for dosa and roti.", imageUrl: "https://picsum.photos/seed/cook006/600/400" },
-  { productId: "COOK007", categoryName: "Cooking Utensils", name: "Measuring Cup Set", price: 299, description: "Accurate measuring cups for cooking.", imageUrl: "https://picsum.photos/seed/cook007/600/400" },
+  // ─── Clothing ─────────────────────────────────────────────────────────────────
+  {
+    productId: "CLTH001", categoryName: "Clothing",
+    name: "Oversized Cotton T-Shirt", price: 799,
+    description: "100% premium cotton oversized tee with dropped shoulders. Breathable everyday essential.",
+    imageUrl: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+    gender: "Men", clothingType: "T-Shirts", size: "L", color: "White"
+  },
+  {
+    productId: "CLTH002", categoryName: "Clothing",
+    name: "Slim Fit Denim Jacket", price: 2199,
+    description: "Classic slim-fit denim jacket with chest pockets. A timeless layering piece.",
+    imageUrl: "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?w=800&q=80",
+    gender: "Men", clothingType: "Jackets", size: "M", color: "Blue"
+  },
+  {
+    productId: "CLTH003", categoryName: "Clothing",
+    name: "Chino Trousers", price: 1599,
+    description: "Slim-fit stretch chinos in a versatile khaki shade. Smart-casual staple.",
+    imageUrl: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
+    gender: "Men", clothingType: "Trousers", size: "32", color: "Khaki"
+  },
+  {
+    productId: "CLTH004", categoryName: "Clothing",
+    name: "Floral Wrap Dress", price: 1899,
+    description: "Flowy V-neck wrap dress with all-over floral print. Perfect for brunch or beach days.",
+    imageUrl: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&q=80",
+    gender: "Women", clothingType: "Dresses", size: "S", color: "Multicolor"
+  },
+  {
+    productId: "CLTH005", categoryName: "Clothing",
+    name: "High-Waist Joggers", price: 1199,
+    description: "Soft fleece high-waist joggers with drawstring waist. Comfort meets street style.",
+    imageUrl: "https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=800&q=80",
+    gender: "Women", clothingType: "Joggers", size: "M", color: "Grey"
+  },
+  {
+    productId: "CLTH006", categoryName: "Clothing",
+    name: "Printed Kurti", price: 1299,
+    description: "Vibrant block-printed kurti in breathable rayon. Comfortable ethnic wear for daily use.",
+    imageUrl: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=800&q=80",
+    gender: "Women", clothingType: "Kurtis", size: "M", color: "Multicolor"
+  },
+  {
+    productId: "CLTH007", categoryName: "Clothing",
+    name: "Formal Oxford Shirt", price: 1499,
+    description: "Crisp cotton Oxford shirt with button-down collar. Office-ready all week long.",
+    imageUrl: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80",
+    gender: "Men", clothingType: "Shirts", size: "L", color: "Light Blue"
+  },
+  {
+    productId: "CLTH008", categoryName: "Clothing",
+    name: "Women's Blazer", price: 2799,
+    description: "Tailored single-button blazer in a neutral tone. Elevates both formal and casual outfits.",
+    imageUrl: "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=800&q=80",
+    gender: "Women", clothingType: "Blazers", size: "S", color: "Beige"
+  },
 
-  // Mobile Phones
-  { productId: "MOB001", categoryName: "Mobile Phones", name: "Nova X1 Smartphone", price: 12999, description: "6GB RAM, 128GB storage, 5000mAh battery.", imageUrl: "https://picsum.photos/seed/mob001/600/400" },
-  { productId: "MOB002", categoryName: "Mobile Phones", name: "Galaxy M Lite", price: 15999, description: "AMOLED display with powerful processor.", imageUrl: "https://picsum.photos/seed/mob002/600/400" },
-  { productId: "MOB003", categoryName: "Mobile Phones", name: "Pixel Lite 5G", price: 28999, description: "Clean Android experience with excellent camera.", imageUrl: "https://picsum.photos/seed/mob003/600/400" },
-  { productId: "MOB004", categoryName: "Mobile Phones", name: "iFruit Mini", price: 49999, description: "Compact premium smartphone.", imageUrl: "https://picsum.photos/seed/mob004/600/400" },
-  { productId: "MOB005", categoryName: "Mobile Phones", name: "RedPlus Note", price: 18999, description: "Fast charging and large display.", imageUrl: "https://picsum.photos/seed/mob005/600/400" },
-  { productId: "MOB006", categoryName: "Mobile Phones", name: "OneMax Nord", price: 23999, description: "Smooth display and strong performance.", imageUrl: "https://picsum.photos/seed/mob006/600/400" },
-  { productId: "MOB007", categoryName: "Mobile Phones", name: "Budget Smart 4G", price: 7999, description: "Affordable smartphone for daily use.", imageUrl: "https://picsum.photos/seed/mob007/600/400" },
+  // ─── Cooking Utensils ─────────────────────────────────────────────────────────
+  {
+    productId: "COOK001", categoryName: "Cooking Utensils",
+    name: "Non-Stick Fry Pan", price: 899,
+    description: "PFOA-free granite-coated non-stick fry pan. Even heat distribution, easy to clean.",
+    imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80"
+  },
+  {
+    productId: "COOK002", categoryName: "Cooking Utensils",
+    name: "Stainless Steel Pressure Cooker", price: 2499,
+    description: "5-litre tri-ply stainless steel pressure cooker with safety valve. ISI certified.",
+    imageUrl: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=800&q=80"
+  },
+  {
+    productId: "COOK003", categoryName: "Cooking Utensils",
+    name: "Chef's Knife Set", price: 1799,
+    description: "6-piece German stainless steel knife set with wooden block. Sharp and well-balanced.",
+    imageUrl: "https://images.unsplash.com/photo-1593618998160-e34014e67546?w=800&q=80"
+  },
+  {
+    productId: "COOK004", categoryName: "Cooking Utensils",
+    name: "Cast Iron Skillet", price: 1599,
+    description: "Pre-seasoned 10-inch cast iron skillet. Ideal for searing, baking, and slow cooking.",
+    imageUrl: "https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?w=800&q=80"
+  },
+  {
+    productId: "COOK005", categoryName: "Cooking Utensils",
+    name: "Silicone Spatula Set", price: 499,
+    description: "Heat-resistant silicone spatulas in 3 sizes. Flexible, non-scratch, dishwasher safe.",
+    imageUrl: "https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?w=800&q=80"
+  },
+  {
+    productId: "COOK006", categoryName: "Cooking Utensils",
+    name: "Wooden Cutting Board", price: 799,
+    description: "Acacia wood cutting board with juice groove. Gentle on knife edges, naturally antibacterial.",
+    imageUrl: "https://images.unsplash.com/photo-1605522561233-768ad7a8fabf?w=800&q=80"
+  },
 
-  // Makeup
-  { productId: "MAKE001", categoryName: "Makeup", name: "Matte Lipstick", price: 499, description: "Long-lasting matte lipstick.", imageUrl: "https://picsum.photos/seed/make001/600/400" },
-  { productId: "MAKE002", categoryName: "Makeup", name: "Liquid Foundation", price: 899, description: "Smooth coverage foundation.", imageUrl: "https://picsum.photos/seed/make002/600/400" },
-  { productId: "MAKE003", categoryName: "Makeup", name: "Eyeliner Pen", price: 299, description: "Water-resistant eyeliner pen.", imageUrl: "https://picsum.photos/seed/make003/600/400" },
-  { productId: "MAKE004", categoryName: "Makeup", name: "Mascara Volume Boost", price: 599, description: "Adds volume and curl to lashes.", imageUrl: "https://picsum.photos/seed/make004/600/400" },
-  { productId: "MAKE005", categoryName: "Makeup", name: "Compact Powder", price: 399, description: "Lightweight compact powder.", imageUrl: "https://picsum.photos/seed/make005/600/400" },
-  { productId: "MAKE006", categoryName: "Makeup", name: "Blush Palette", price: 699, description: "Soft blush shades for natural glow.", imageUrl: "https://picsum.photos/seed/make006/600/400" },
-  { productId: "MAKE007", categoryName: "Makeup", name: "Makeup Brush Kit", price: 999, description: "Complete brush kit for makeup application.", imageUrl: "https://picsum.photos/seed/make007/600/400" },
+  // ─── Mobile Phones ────────────────────────────────────────────────────────────
+  {
+    productId: "MOB001", categoryName: "Mobile Phones",
+    name: "Nova X1 Smartphone", price: 12999,
+    description: "6GB RAM | 128GB Storage | 6.5\" FHD+ display | 50MP triple camera | 5000mAh battery.",
+    imageUrl: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80"
+  },
+  {
+    productId: "MOB002", categoryName: "Mobile Phones",
+    name: "ZenPro 5G", price: 21999,
+    description: "5G-ready phone with 8GB RAM | 256GB | 120Hz AMOLED display | 108MP main camera.",
+    imageUrl: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=800&q=80"
+  },
+  {
+    productId: "MOB003", categoryName: "Mobile Phones",
+    name: "BudgetPlus Y2", price: 8499,
+    description: "Reliable budget smartphone with 4GB RAM | 64GB | long-lasting 6000mAh battery.",
+    imageUrl: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=800&q=80"
+  },
+  {
+    productId: "MOB004", categoryName: "Mobile Phones",
+    name: "iFruit Mini", price: 49999,
+    description: "Premium compact flagship with ceramic build | 256GB | ProRAW camera system.",
+    imageUrl: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&q=80"
+  },
+  {
+    productId: "MOB005", categoryName: "Mobile Phones",
+    name: "GalaxyFold Ultra", price: 89999,
+    description: "Foldable smartphone with 12GB RAM | 512GB | dual screen | S-Pen support.",
+    imageUrl: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80"
+  },
+  {
+    productId: "MOB006", categoryName: "Mobile Phones",
+    name: "Pixel Clear 8", price: 34999,
+    description: "Pure Android experience with 7 years of updates | Tensor chip | 50MP camera.",
+    imageUrl: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=800&q=80"
+  },
 
-  // Grocery
-  { productId: "GROC001", categoryName: "Grocery", name: "Basmati Rice 5kg", price: 699, description: "Premium long-grain basmati rice.", imageUrl: "https://picsum.photos/seed/groc001/600/400" },
-  { productId: "GROC002", categoryName: "Grocery", name: "Wheat Flour 5kg", price: 299, description: "Fresh chakki atta for daily meals.", imageUrl: "https://picsum.photos/seed/groc002/600/400" },
-  { productId: "GROC003", categoryName: "Grocery", name: "Sunflower Oil 1L", price: 159, description: "Refined sunflower cooking oil.", imageUrl: "https://picsum.photos/seed/groc003/600/400" },
-  { productId: "GROC004", categoryName: "Grocery", name: "Toor Dal 1kg", price: 189, description: "High-quality protein-rich dal.", imageUrl: "https://picsum.photos/seed/groc004/600/400" },
-  { productId: "GROC005", categoryName: "Grocery", name: "Sugar 1kg", price: 55, description: "Fine grain sugar.", imageUrl: "https://picsum.photos/seed/groc005/600/400" },
-  { productId: "GROC006", categoryName: "Grocery", name: "Tea Powder 500g", price: 249, description: "Strong aromatic tea powder.", imageUrl: "https://picsum.photos/seed/groc006/600/400" },
-  { productId: "GROC007", categoryName: "Grocery", name: "Salt 1kg", price: 25, description: "Iodized cooking salt.", imageUrl: "https://picsum.photos/seed/groc007/600/400" },
+  // ─── Makeup ───────────────────────────────────────────────────────────────────
+  {
+    productId: "MAKE001", categoryName: "Makeup",
+    name: "Matte Lipstick", price: 499,
+    description: "Highly pigmented long-lasting matte lipstick. Available in 12 bold shades.",
+    imageUrl: "https://images.unsplash.com/photo-1586495777744-4e6232bf2178?w=800&q=80"
+  },
+  {
+    productId: "MAKE002", categoryName: "Makeup",
+    name: "HD Foundation", price: 899,
+    description: "Buildable medium-to-full coverage liquid foundation with SPF 15. 30 shades.",
+    imageUrl: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80"
+  },
+  {
+    productId: "MAKE003", categoryName: "Makeup",
+    name: "Eyeshadow Palette – Nudes", price: 1299,
+    description: "18-pan neutral eyeshadow palette with matte, shimmer, and glitter finishes.",
+    imageUrl: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80"
+  },
+  {
+    productId: "MAKE004", categoryName: "Makeup",
+    name: "Volumising Mascara", price: 649,
+    description: "Fibrous volumising mascara with curved brush. Adds dramatic length and curl.",
+    imageUrl: "https://images.unsplash.com/photo-1631214500004-70d2b46e5fc2?w=800&q=80"
+  },
+  {
+    productId: "MAKE005", categoryName: "Makeup",
+    name: "Setting Powder", price: 749,
+    description: "Translucent loose setting powder. Locks makeup for up to 16 hours, controls shine.",
+    imageUrl: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80"
+  },
+  {
+    productId: "MAKE006", categoryName: "Makeup",
+    name: "Highlighter Stick", price: 549,
+    description: "Cream-to-powder highlighter stick for a natural glow on cheekbones and brow bone.",
+    imageUrl: "https://images.unsplash.com/photo-1643543677934-3e1e695379c0?w=800&q=80"
+  },
 
-  // Electronics
-  { productId: "ELEC001", categoryName: "Electronics", name: "Bluetooth Earbuds", price: 1499, description: "Wireless earbuds with charging case.", imageUrl: "https://picsum.photos/seed/elec001/600/400" },
-  { productId: "ELEC002", categoryName: "Electronics", name: "Power Bank 10000mAh", price: 999, description: "Fast-charging portable power bank.", imageUrl: "https://picsum.photos/seed/elec002/600/400" },
-  { productId: "ELEC003", categoryName: "Electronics", name: "Smart Speaker", price: 2499, description: "Voice-enabled smart speaker.", imageUrl: "https://picsum.photos/seed/elec003/600/400" },
-  { productId: "ELEC004", categoryName: "Electronics", name: "USB-C Cable", price: 199, description: "Durable fast charging cable.", imageUrl: "https://picsum.photos/seed/elec004/600/400" },
-  { productId: "ELEC005", categoryName: "Electronics", name: "Wireless Mouse", price: 599, description: "Smooth wireless mouse for laptop.", imageUrl: "https://picsum.photos/seed/elec005/600/400" },
-  { productId: "ELEC006", categoryName: "Electronics", name: "Laptop Stand", price: 899, description: "Adjustable laptop stand.", imageUrl: "https://picsum.photos/seed/elec006/600/400" },
-  { productId: "ELEC007", categoryName: "Electronics", name: "LED Desk Lamp", price: 799, description: "Rechargeable LED study lamp.", imageUrl: "https://picsum.photos/seed/elec007/600/400" },
+  // ─── Grocery ──────────────────────────────────────────────────────────────────
+  {
+    productId: "GROC001", categoryName: "Grocery",
+    name: "Organic Basmati Rice – 5kg", price: 699,
+    description: "Premium aged organic basmati rice. Long grains, aromatic, and non-sticky.",
+    imageUrl: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80"
+  },
+  {
+    productId: "GROC002", categoryName: "Grocery",
+    name: "Cold-Pressed Coconut Oil – 1L", price: 499,
+    description: "100% pure cold-pressed virgin coconut oil. No additives, suitable for cooking and hair care.",
+    imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800&q=80"
+  },
+  {
+    productId: "GROC003", categoryName: "Grocery",
+    name: "Multiflora Honey – 500g", price: 349,
+    description: "Raw unprocessed multiflora honey. Rich in antioxidants, no added sugar.",
+    imageUrl: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&q=80"
+  },
+  {
+    productId: "GROC004", categoryName: "Grocery",
+    name: "Mixed Dry Fruits Pack – 500g", price: 599,
+    description: "Premium assorted dry fruits: almonds, cashews, raisins, and pistachios.",
+    imageUrl: "https://images.unsplash.com/photo-1606791422814-b32c705e3e2f?w=800&q=80"
+  },
+  {
+    productId: "GROC005", categoryName: "Grocery",
+    name: "Whole Wheat Flour – 10kg", price: 449,
+    description: "Stone-ground whole wheat atta with natural bran. Makes soft rotis.",
+    imageUrl: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&q=80"
+  },
+  {
+    productId: "GROC006", categoryName: "Grocery",
+    name: "Green Tea – 100 Bags", price: 299,
+    description: "Premium Darjeeling green tea bags. Light, refreshing, rich in antioxidants.",
+    imageUrl: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80"
+  },
 
-  // Bags
-  { productId: "BAG001", categoryName: "Bags", name: "Travel Backpack", price: 1999, description: "Spacious backpack for travel.", imageUrl: "https://picsum.photos/seed/bag001/600/400" },
-  { productId: "BAG002", categoryName: "Bags", name: "Laptop Bag", price: 1499, description: "Protective laptop bag with compartments.", imageUrl: "https://picsum.photos/seed/bag002/600/400" },
-  { productId: "BAG003", categoryName: "Bags", name: "School Bag", price: 999, description: "Durable school bag for students.", imageUrl: "https://picsum.photos/seed/bag003/600/400" },
-  { productId: "BAG004", categoryName: "Bags", name: "Handbag", price: 1299, description: "Stylish handbag for daily use.", imageUrl: "https://picsum.photos/seed/bag004/600/400" },
-  { productId: "BAG005", categoryName: "Bags", name: "Gym Duffel Bag", price: 1199, description: "Large duffel bag for gym and sports.", imageUrl: "https://picsum.photos/seed/bag005/600/400" },
-  { productId: "BAG006", categoryName: "Bags", name: "Sling Bag", price: 699, description: "Compact sling bag for essentials.", imageUrl: "https://picsum.photos/seed/bag006/600/400" },
-  { productId: "BAG007", categoryName: "Bags", name: "Trolley Bag", price: 3499, description: "Hard-shell trolley bag for travel.", imageUrl: "https://picsum.photos/seed/bag007/600/400" },
+  // ─── Electronics ──────────────────────────────────────────────────────────────
+  {
+    productId: "ELEC001", categoryName: "Electronics",
+    name: "True Wireless Earbuds", price: 2999,
+    description: "Active noise-cancelling TWS earbuds. 30hr total battery life, IPX5 water resistance.",
+    imageUrl: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&q=80"
+  },
+  {
+    productId: "ELEC002", categoryName: "Electronics",
+    name: "Portable Bluetooth Speaker", price: 1999,
+    description: "360° sound, 20W output, 12hr battery. Waterproof IPX7 design for outdoor use.",
+    imageUrl: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80"
+  },
+  {
+    productId: "ELEC003", categoryName: "Electronics",
+    name: "65W Fast Charger", price: 1299,
+    description: "GaN 65W USB-C fast charger compatible with laptops, phones, and tablets.",
+    imageUrl: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80"
+  },
+  {
+    productId: "ELEC004", categoryName: "Electronics",
+    name: "Smart LED Strip Lights", price: 899,
+    description: "5-metre RGB smart LED strip with app and voice control. 16M colour options.",
+    imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    productId: "ELEC005", categoryName: "Electronics",
+    name: "Mechanical Gaming Keyboard", price: 3999,
+    description: "TKL mechanical keyboard with RGB backlight and tactile brown switches.",
+    imageUrl: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&q=80"
+  },
+  {
+    productId: "ELEC006", categoryName: "Electronics",
+    name: "Noise-Cancelling Headphones", price: 5999,
+    description: "Over-ear ANC headphones with Hi-Res audio, 40hr battery, and foldable design.",
+    imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80"
+  },
+  {
+    productId: "ELEC007", categoryName: "Electronics",
+    name: "10000mAh Power Bank", price: 1499,
+    description: "Slim dual-output power bank with 22.5W fast charging and LED indicator.",
+    imageUrl: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=800&q=80"
+  },
 
-  // Watches
-  { productId: "WATCH001", categoryName: "Watches", name: "Classic Analog Watch", price: 1999, description: "Elegant analog wrist watch.", imageUrl: "https://picsum.photos/seed/watch001/600/400" },
-  { productId: "WATCH002", categoryName: "Watches", name: "Smart Fitness Watch", price: 2999, description: "Tracks steps, heart rate and notifications.", imageUrl: "https://picsum.photos/seed/watch002/600/400" },
-  { productId: "WATCH003", categoryName: "Watches", name: "Leather Strap Watch", price: 2499, description: "Premium leather strap watch.", imageUrl: "https://picsum.photos/seed/watch003/600/400" },
-  { productId: "WATCH004", categoryName: "Watches", name: "Digital Sports Watch", price: 999, description: "Water-resistant sports watch.", imageUrl: "https://picsum.photos/seed/watch004/600/400" },
-  { productId: "WATCH005", categoryName: "Watches", name: "Metal Chain Watch", price: 2199, description: "Stylish metal chain watch.", imageUrl: "https://picsum.photos/seed/watch005/600/400" },
-  { productId: "WATCH006", categoryName: "Watches", name: "Kids Digital Watch", price: 499, description: "Colorful digital watch for kids.", imageUrl: "https://picsum.photos/seed/watch006/600/400" },
-  { productId: "WATCH007", categoryName: "Watches", name: "Luxury Gold Watch", price: 5999, description: "Premium gold-tone watch.", imageUrl: "https://picsum.photos/seed/watch007/600/400" },
+  // ─── Bags ─────────────────────────────────────────────────────────────────────
+  {
+    productId: "BAG001", categoryName: "Bags",
+    name: "Travel Backpack", price: 1999,
+    description: "35L travel backpack with USB charging port, laptop sleeve, and multiple pockets.",
+    imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"
+  },
+  {
+    productId: "BAG002", categoryName: "Bags",
+    name: "Laptop Messenger Bag", price: 1499,
+    description: "Water-resistant canvas messenger bag fits up to 15.6\" laptops. Padded compartment.",
+    imageUrl: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80"
+  },
+  {
+    productId: "BAG003", categoryName: "Bags",
+    name: "Women's Tote Bag", price: 1299,
+    description: "Spacious vegan leather tote with interior zip pocket. Minimalist everyday carry.",
+    imageUrl: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=80"
+  },
+  {
+    productId: "BAG004", categoryName: "Bags",
+    name: "Gym Duffel Bag", price: 1199,
+    description: "30L gym bag with separate shoe compartment and ventilated mesh pockets.",
+    imageUrl: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80"
+  },
+  {
+    productId: "BAG005", categoryName: "Bags",
+    name: "Mini Crossbody Bag", price: 999,
+    description: "Compact crossbody bag with adjustable strap. Perfect for evenings out.",
+    imageUrl: "https://images.unsplash.com/photo-1594938298603-c8148c4b4fb0?w=800&q=80"
+  },
+  {
+    productId: "BAG006", categoryName: "Bags",
+    name: "Rolling Suitcase – 20 inch", price: 3999,
+    description: "Hardshell carry-on suitcase with TSA lock and 360° spinner wheels.",
+    imageUrl: "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=800&q=80"
+  },
 
-  // Home Decor
-  { productId: "HOME001", categoryName: "Home Decor", name: "Wall Clock", price: 799, description: "Modern wall clock for living room.", imageUrl: "https://picsum.photos/seed/home001/600/400" },
-  { productId: "HOME002", categoryName: "Home Decor", name: "Table Lamp", price: 1299, description: "Decorative table lamp.", imageUrl: "https://picsum.photos/seed/home002/600/400" },
-  { productId: "HOME003", categoryName: "Home Decor", name: "Flower Vase", price: 599, description: "Ceramic flower vase.", imageUrl: "https://picsum.photos/seed/home003/600/400" },
-  { productId: "HOME004", categoryName: "Home Decor", name: "Wall Painting", price: 1499, description: "Abstract wall painting.", imageUrl: "https://picsum.photos/seed/home004/600/400" },
-  { productId: "HOME005", categoryName: "Home Decor", name: "Cushion Covers Set", price: 499, description: "Set of 5 cushion covers.", imageUrl: "https://picsum.photos/seed/home005/600/400" },
-  { productId: "HOME006", categoryName: "Home Decor", name: "Decorative Candles", price: 399, description: "Scented decorative candles.", imageUrl: "https://picsum.photos/seed/home006/600/400" },
-  { productId: "HOME007", categoryName: "Home Decor", name: "Indoor Plant Pot", price: 699, description: "Stylish indoor plant pot.", imageUrl: "https://picsum.photos/seed/home007/600/400" },
+  // ─── Watches ──────────────────────────────────────────────────────────────────
+  {
+    productId: "WTCH001", categoryName: "Watches",
+    name: "Classic Analog Watch", price: 2499,
+    description: "Minimalist dial with genuine leather strap. Japanese quartz movement, 5ATM water resistant.",
+    imageUrl: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&q=80"
+  },
+  {
+    productId: "WTCH002", categoryName: "Watches",
+    name: "Smart Fitness Watch", price: 3999,
+    description: "1.4\" AMOLED smartwatch with SpO2, heart rate, sleep tracking, and 7-day battery.",
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80"
+  },
+  {
+    productId: "WTCH003", categoryName: "Watches",
+    name: "Chronograph Steel Watch", price: 5999,
+    description: "Stainless steel chronograph with sapphire-coated glass and date window.",
+    imageUrl: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=800&q=80"
+  },
+  {
+    productId: "WTCH004", categoryName: "Watches",
+    name: "Women's Rose Gold Watch", price: 3499,
+    description: "Elegant rose gold case with mesh strap and mother-of-pearl dial.",
+    imageUrl: "https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?w=800&q=80"
+  },
+  {
+    productId: "WTCH005", categoryName: "Watches",
+    name: "Diver's Sports Watch", price: 4999,
+    description: "200m water-resistant diver watch with rotating bezel and luminous hands.",
+    imageUrl: "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=800&q=80"
+  },
+  {
+    productId: "WTCH006", categoryName: "Watches",
+    name: "Wooden Watch", price: 2999,
+    description: "Handcrafted natural bamboo watch. Lightweight, eco-friendly, unique grain pattern.",
+    imageUrl: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=800&q=80"
+  },
 
-  // Books
-  { productId: "BOOK001", categoryName: "Books", name: "Atomic Habits", price: 399, description: "Popular self-improvement book.", imageUrl: "https://picsum.photos/seed/book001/600/400" },
-  { productId: "BOOK002", categoryName: "Books", name: "Rich Dad Poor Dad", price: 299, description: "Personal finance classic.", imageUrl: "https://picsum.photos/seed/book002/600/400" },
-  { productId: "BOOK003", categoryName: "Books", name: "Clean Code", price: 699, description: "Programming best practices book.", imageUrl: "https://picsum.photos/seed/book003/600/400" },
-  { productId: "BOOK004", categoryName: "Books", name: "JavaScript Guide", price: 499, description: "Beginner-friendly JavaScript book.", imageUrl: "https://picsum.photos/seed/book004/600/400" },
-  { productId: "BOOK005", categoryName: "Books", name: "The Psychology of Money", price: 349, description: "Book about money behavior.", imageUrl: "https://picsum.photos/seed/book005/600/400" },
-  { productId: "BOOK006", categoryName: "Books", name: "Deep Work", price: 449, description: "Focus and productivity book.", imageUrl: "https://picsum.photos/seed/book006/600/400" },
-  { productId: "BOOK007", categoryName: "Books", name: "System Design Basics", price: 599, description: "Beginner system design guide.", imageUrl: "https://picsum.photos/seed/book007/600/400" }
+  // ─── Home Decor ───────────────────────────────────────────────────────────────
+  {
+    productId: "DECO001", categoryName: "Home Decor",
+    name: "Scented Soy Candles – Set of 3", price: 699,
+    description: "Hand-poured soy wax candles in lavender, sandalwood, and vanilla. 40hr burn each.",
+    imageUrl: "https://images.unsplash.com/photo-1602874801006-31b35a71ad5f?w=800&q=80"
+  },
+  {
+    productId: "DECO002", categoryName: "Home Decor",
+    name: "Macramé Wall Hanging", price: 899,
+    description: "Handcrafted bohemian macramé wall hanging. Natural cotton, 60cm wide.",
+    imageUrl: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&q=80"
+  },
+  {
+    productId: "DECO003", categoryName: "Home Decor",
+    name: "Ceramic Planter Set", price: 1199,
+    description: "Set of 3 minimalist matte ceramic planters in different sizes. Drainage hole included.",
+    imageUrl: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&q=80"
+  },
+  {
+    productId: "DECO004", categoryName: "Home Decor",
+    name: "Woven Jute Rug – 4×6 ft", price: 2499,
+    description: "Natural jute area rug, hand-woven, reversible. Adds earthy warmth to any room.",
+    imageUrl: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+  },
+  {
+    productId: "DECO005", categoryName: "Home Decor",
+    name: "Decorative Throw Pillow Set", price: 1099,
+    description: "Set of 2 velvet throw pillows with geometric embroidery. 45×45 cm, insert included.",
+    imageUrl: "https://images.unsplash.com/photo-1588099883999-bb23bc7a26c6?w=800&q=80"
+  },
+  {
+    productId: "DECO006", categoryName: "Home Decor",
+    name: "Glass Vase Set", price: 799,
+    description: "Set of 3 hand-blown glass bud vases in smoke, amber, and clear. Table centrepieces.",
+    imageUrl: "https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?w=800&q=80"
+  },
+
+  // ─── Books ────────────────────────────────────────────────────────────────────
+  {
+    productId: "BOOK001", categoryName: "Books",
+    name: "Atomic Habits", price: 399,
+    description: "James Clear's #1 bestseller on building good habits and breaking bad ones.",
+    imageUrl: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80"
+  },
+  {
+    productId: "BOOK002", categoryName: "Books",
+    name: "The Psychology of Money", price: 349,
+    description: "Morgan Housel's timeless lessons on wealth, greed, and happiness.",
+    imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80"
+  },
+  {
+    productId: "BOOK003", categoryName: "Books",
+    name: "Sapiens: A Brief History of Humankind", price: 499,
+    description: "Yuval Noah Harari's acclaimed narrative of the human journey from savanna to civilisation.",
+    imageUrl: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80"
+  },
+  {
+    productId: "BOOK004", categoryName: "Books",
+    name: "Deep Work", price: 379,
+    description: "Cal Newport's guide to focused success in a distracted world.",
+    imageUrl: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80"
+  },
+  {
+    productId: "BOOK005", categoryName: "Books",
+    name: "The Alchemist", price: 299,
+    description: "Paulo Coelho's beloved fable about following your dreams and listening to your heart.",
+    imageUrl: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80"
+  },
+  {
+    productId: "BOOK006", categoryName: "Books",
+    name: "Think and Grow Rich", price: 249,
+    description: "Napoleon Hill's classic on the mindset and philosophy of wealth and success.",
+    imageUrl: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800&q=80"
+  },
+  {
+    productId: "BOOK007", categoryName: "Books",
+    name: "Rich Dad Poor Dad", price: 329,
+    description: "Robert Kiyosaki's personal finance classic on financial literacy and investing.",
+    imageUrl: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&q=80"
+  },
 ];
-
-function generateImageUrl(name, category) {
-  const categoryColors = {
-    "Shoes": "2c3e50",
-    "Clothing": "e74c3c",
-    "Cooking Utensils": "f39c12",
-    "Mobile Phones": "3498db",
-    "Makeup": "e91e63",
-    "Grocery": "27ae60",
-    "Electronics": "9b59b6",
-    "Bags": "795548",
-    "Watches": "607d8b",
-    "Home Decor": "ff9800",
-    "Books": "3f51b5"
-  };
-  const color = categoryColors[category] || "607d8b";
-  const shortName = name.length > 22 ? name.substring(0, 22) + ".." : name;
-  return `https://placehold.co/400x400/${color}/white/png?text=${encodeURIComponent(shortName)}`;
-}
 
 async function seed() {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to MongoDB...");
 
-    // Clear existing data
     await Category.deleteMany({});
     await Product.deleteMany({});
-    console.log("Cleared existing categories and products.");
 
-    // Insert categories
-    const insertedCategories = await Category.insertMany(categoriesData);
-    console.log(`Inserted ${insertedCategories.length} categories.`);
+    const categories = await Category.insertMany(categoriesData);
 
-    // Build category name -> _id map
     const categoryMap = {};
-    insertedCategories.forEach((cat) => {
-      categoryMap[cat.name] = cat._id;
-    });
+    categories.forEach(c => (categoryMap[c.name] = c._id));
 
-    // Map products to use ObjectId references
-    const productsToInsert = productsData.map((p) => ({
-      productId: p.productId,
+    const products = productsData.map(p => ({
+      ...p,
       category: categoryMap[p.categoryName],
-      name: p.name,
-      price: p.price,
-      description: p.description,
-      imageUrl: generateImageUrl(p.name, p.categoryName),
-      isActive: true,
-      gender: p.gender,
-      clothingType: p.clothingType,
-      size: p.size,
-      color: p.color
+      isActive: true
     }));
 
-    const insertedProducts = await Product.insertMany(productsToInsert);
-    console.log(`Inserted ${insertedProducts.length} products.`);
+    await Product.insertMany(products);
 
-    console.log("Seeding completed successfully.");
-  } catch (error) {
-    console.error("Seeding failed:", error);
-    process.exit(1);
+    console.log(`✅ Seeding completed — ${products.length} products across ${categories.length} categories`);
+  } catch (err) {
+    console.error(err);
   } finally {
-    await mongoose.disconnect();
-    console.log("Disconnected from MongoDB.");
+    mongoose.disconnect();
   }
 }
 
 seed();
-

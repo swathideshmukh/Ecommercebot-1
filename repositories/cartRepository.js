@@ -77,17 +77,19 @@ async function getCart(phone) {
 
   const cartDoc = await Cart.findById(cart.id).populate("items.product").lean();
 
-  const items = (cartDoc.items || []).map((item) => {
-    const p = item.product;
-    const subtotal = p.price * item.quantity;
-    return {
-      id: p.productId,
-      name: p.name,
-      price: p.price,
-      quantity: item.quantity,
-      subtotal
-    };
-  });
+  const items = (cartDoc.items || [])
+    .filter((item) => item.product && item.product.price != null)
+    .map((item) => {
+      const p = item.product;
+      const subtotal = p.price * item.quantity;
+      return {
+        id: p.productId,
+        name: p.name,
+        price: p.price,
+        quantity: item.quantity,
+        subtotal
+      };
+    });
 
   const total = items.reduce((sum, item) => sum + Number(item.subtotal), 0);
 
