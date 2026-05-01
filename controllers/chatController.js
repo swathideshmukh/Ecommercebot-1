@@ -1,6 +1,8 @@
-const productRepository = require("../repositories/productRepository");
+ const productRepository = require("../repositories/productRepository");
 const cartService = require("../services/cartService");
 const orderService = require("../services/orderService");
+const recommendationService = require("../services/recommendationService");
+const recommendationRepository = require("../repositories/recommendationRepository");
 
 const processedMessages = new Set();
 const userSelections = {}; // phone -> { productId, productName, size, color, quantity, step }
