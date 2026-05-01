@@ -57,8 +57,17 @@ async function getProductsByCategoryName(categoryName, filters = {}) {
     };
   }
 
-  if (filters.brand) {
+if (filters.brand) {
     query.brand = { $regex: new RegExp(`^${filters.brand}$`, "i") };
+  }
+
+  // Price filters
+  if (filters.maxPrice) {
+    query.price = { ...query.price, $lte: filters.maxPrice };
+  }
+
+  if (filters.minPrice) {
+    query.price = { ...query.price, $gte: filters.minPrice };
   }
 
   const products = await Product.find(query)

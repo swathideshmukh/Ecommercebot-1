@@ -63,9 +63,138 @@ function getMessageInput(message) {
   return "";
 }
 
+// ===================== NATURAL LANGUAGE PARSER =====================
+// Supported categories
+const supportedCategories = [
+  "shoes", "bags", "clothing", "electronics", "mobile phones", "watches",
+  "makeup", "grocery", "books", "cooking utensils", "home decor"
+];
+
+// Parse natural language price queries
+function parseNaturalLanguageQuery(input) {
+  const lower = input.toLowerCase();
+  
+  // Find category
+  let category = null;
+  for (const cat of supportedCategories) {
+    if (lower.includes(cat)) {
+      category = cat.charAt(0).toUpperCase() + cat.slice(1);
+      // Map singular to actual category name
+      if (cat === "mobile phones") category = "Mobile Phones";
+      if (cat === "cooking utensils") category = "Cooking Utensils";
+      if (cat === "home decor") category = "Home Decor";
+      break;
+    }
+  }
+
+  if (!category) return null;
+
+  const filters = {};
+  let maxPrice = null;
+  let minPrice = null;
+
+  // Parse "under X", "below X", "less than X", "under ₹X", "upto X", "within X"
+  const underPatterns = [
+    /under\s*₹?(\d+(?:k)?)/i,
+    /below\s*₹?(\d+(?:k)?)/i,
+    /less\s+than\s*₹?(\d+(?:k)?)/i,
+    /upto\s*₹?(\d+(?:k)?)/i,
+    /within\s*₹?(\d+(?:k)?)/i
+  ];
+
+  for (const pattern of underPatterns) {
+    const match = lower.match(pattern);
+    if (match) {
+      let val = match[1];
+      if (val.toLowerCase().endsWith("k")) {
+        maxPrice = parseInt(val.slice(0, -1)) * 1000;
+      } else {
+        maxPrice = parseInt(val);
+      }
+      break;
+    }
+  }
+
+  // Parse "above X", "over X", "more than X"
+  const abovePatterns = [
+    /above\s*₹?(\d+(?:k)?)/i,
+    /over\s*₹?(\d+(?:k)?)/i,
+    /more\s+than\s*₹?(\d+(?:k)?)/i
+  ];
+
+  for (const pattern of abovePatterns) {
+    const match = lower.match(pattern);
+    if (match) {
+      let val = match[1];
+      if (val.toLowerCase().endsWith("k")) {
+        minPrice = parseInt(val.slice(0, -1)) * 1000;
+      } else {
+        minPrice = parseInt(val);
+      }
+      break;
+    }
+  }
+
+  // Parse "between X and Y" or "X to Y"
+  const rangePatterns = [
+    /between\s*₹?(\d+(?:k)?)\s+(?:and|to)\s*₹?(\d+(?:k)?)/i,
+    /(\d+(?:k)?)\s+to\s*₹?(\d+(?:k)?)/i
+  ];
+
+  for (const pattern of rangePatterns) {
+    const match = lower.match(pattern);
+    if (match) {
+      let minVal = match[1];
+      let maxVal = match[2];
+      
+      if (minVal.toLowerCase().endsWith("k")) {
+        minPrice = parseInt(minVal.slice(0, -1)) * 1000;
+      } else {
+        minPrice = parseInt(minVal);
+      }
+      
+      if (maxVal.toLowerCase().endsWith("k")) {
+        maxPrice = parseInt(maxVal.slice(0, -1)) * 1000;
+      } else {
+        maxPrice = parseInt(maxVal);
+      }
+      break;
+    }
+  }
+
+  if (maxPrice) filters.maxPrice = maxPrice;
+  if (minPrice) filters.minPrice = minPrice;
+
+  return { category, filters };
+}
+
 // ===================== ROUTER =====================
 async function routeMessage(phone, input) {
   const text = input.toLowerCase();
+
+  // ====== NATURAL LANGUAGE QUERY CHECK ======
+  const parsed = parseNaturalLanguageQuery(input);
+  if (parsed) {
+    const { category, filters } = parsed;
+    const allProducts = await productRepository.getProductsByCategoryName(category, filters);
+    
+    if (!allProducts.length && filters.maxPrice) {
+      // No filtered results - show unfiltered with message
+      const unfilteredProducts = await productRepository.getProductsByCategoryName(category);
+      if (unfilteredProducts.length) {
+        const priceMsg = filters.minPrice 
+          ? `between ₹${filters.minPrice} and ₹${filters.maxPrice}`
+          : `under ₹${filters.maxPrice}`;
+        await sendWhatsAppMessage(phone, `😕 No ${category} found ${priceMsg}. Here are all ${category} instead:`);
+        // Show first page of unfiltered
+        return sendProductsWithList(phone, category, unfilteredProducts, 0);
+      }
+    }
+    
+    if (allProducts.length) {
+      return sendProductsWithList(phone, category, allProducts, 0);
+    }
+  }
 
   // ====== CHECK ACTIVE CLOTHING FLOW FIRST ======
   const clothingSelection = userSelections[phone];
@@ -237,6 +366,15 @@ async function sendCategories(phone) {
 async function sendProducts(phone, category, page = 0) {
   const allProducts = await productRepository.getProductsByCategoryName(category);
 
+  if (!allProducts.length) {
+    return sendWhatsAppMessage(phone, "😕 No products found in this category.");
+  }
+
+  return sendProductsWithList(phone, category, allProducts, page);
+}
+
+// Helper to display products with pre-fetched list
+async function sendProductsWithList(phone, category, allProducts, page = 0) {
   if (!allProducts.length) {
     return sendWhatsAppMessage(phone, "😕 No products found in this category.");
   }
