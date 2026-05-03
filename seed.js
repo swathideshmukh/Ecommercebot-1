@@ -86,7 +86,13 @@ const productsData = [
     imageUrl: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
     gender: "Men", clothingType: "Trousers", size: "32", color: "Khaki"
   },
-  
+  {
+    productId: "CLTH004", categoryName: "Clothing",
+    name: "Floral Wrap Dress", price: 1899,
+    description: "Flowy V-neck wrap dress with all-over floral print. Perfect for brunch or beach days.",
+    imageUrl: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&q=80",
+    gender: "Women", clothingType: "Dresses", size: "S", color: "Multicolor"
+  },
   {
     productId: "CLTH005", categoryName: "Clothing",
     name: "High-Waist Joggers", price: 1199,
