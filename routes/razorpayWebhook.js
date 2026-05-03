@@ -4,6 +4,7 @@ const router = express.Router();
 
 const orderRepository = require("../repositories/orderRepository");
 const { sendWhatsAppMessage } = require("../services/whatsappService");
+const invoiceService = require("../services/invoiceService");
 
 router.post("/", async (req, res) => {
   try {
@@ -33,16 +34,26 @@ router.post("/", async (req, res) => {
 
     if (order) {
       await sendWhatsAppMessage(
-        order.phone,
+        order.user.phone,
         `🎉 *Payment Successful!*
 
 Your order is confirmed.
 
-🧾 Order ID: ${order.order_code}
+🧾 Order ID: ${order.orderCode}
 💰 Paid Amount: ₹${Number(order.total).toLocaleString("en-IN")}
 
 Thank you for shopping with ShopBot!`
       );
+
+      // Send invoice after delay
+      setTimeout(async () => {
+        try {
+          const pdfBuffer = await invoiceService.generateInvoicePDF(order, order.user.phone);
+          await invoiceService.sendInvoiceViaWhatsApp(order.user.phone, order.orderCode, pdfBuffer);
+        } catch (e) {
+          console.error('Invoice send failed:', e);
+        }
+      }, 1000);
     }
 
     return res.sendStatus(200);
