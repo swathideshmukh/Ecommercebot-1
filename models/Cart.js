@@ -23,7 +23,15 @@ const cartSchema = new mongoose.Schema(
           default: 1
         }
       }
-    ]
+    ],
+    lastReminderSent: {
+      type: Date,
+      default: null
+    },
+    reminderCount: {
+      type: Number,
+      default: 0
+    }
   },
   { timestamps: true }
 );

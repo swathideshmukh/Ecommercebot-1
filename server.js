@@ -5,6 +5,7 @@ const connectMongoDB = require("./config/mongodb");
 
 const webhookRoutes = require("./routes/webhook");
 const razorpayWebhookRoutes = require("./routes/razorpayWebhook");
+const abandonedCartService = require("./services/abandonedCartService");
 
 const app = express();
 
@@ -53,6 +54,16 @@ app.get("/webhook", (req, res) => {
 });
 // WhatsApp webhook
 app.use("/webhook", webhookRoutes);
+
+// Manual trigger for testing abandoned carts (remove in production)
+app.get("/admin/test-abandoned-carts", async (req, res) => {
+  try {
+    const count = await abandonedCartService.checkAbandonedCarts();
+    res.json({ message: "Done", count });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 
