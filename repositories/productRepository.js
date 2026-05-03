@@ -15,9 +15,7 @@ const hiddenCategories = [
   "Smart Watches", "Analog Watches", "Sports Watches"
 ];
 
-// ============================
 // GET MAIN CATEGORIES
-// ============================
 async function getCategories() {
   const rows = await Category.find({
     name: { $nin: hiddenCategories }
@@ -31,9 +29,41 @@ async function getCategories() {
   }));
 }
 
-// ============================
-// GET PRODUCTS BY CATEGORY (WITH OPTIONAL FILTERS)
-// ============================
+// SEARCH PRODUCTS BY KEYWORDS - FIXED
+async function searchProducts(query, limit = 10) {
+  if (!query || query.length < 2) return [];
+
+  const searchQuery = {
+    $or: [
+      { name: new RegExp(query, 'i') },
+      { description: new RegExp(query, 'i') },
+      { $expr: { $regexMatch: { input: { $toString: '$category' }, regex: query, options: 'i' } } },
+      { brand: new RegExp(query, 'i') }
+    ],
+    isActive: true
+  };
+
+  const products = await Product.find(searchQuery)
+    .populate('category', 'name')
+    .sort({ name: 1 })
+    .limit(limit)
+    .lean();
+
+  return products.map((p) => ({
+    id: p.productId,
+    name: p.name,
+    price: p.price,
+    description: p.description,
+    image_url: p.imageUrl,
+    gender: p.gender,
+    clothing_type: p.clothingType,
+    size: p.size,
+    color: p.color,
+    category: p.category ? p.category.name : "General"
+  }));
+}
+
+// GET PRODUCTS BY CATEGORY
 async function getProductsByCategoryName(categoryName, filters = {}) {
   const category = await Category.findOne({
     name: { $regex: new RegExp(`^${categoryName}$`, "i") }
@@ -46,18 +76,16 @@ async function getProductsByCategoryName(categoryName, filters = {}) {
     isActive: true
   };
 
-  // Optional filters (only applied if exist)
+  // Optional filters
   if (filters.gender) {
     query.gender = { $regex: new RegExp(`^${filters.gender}$`, "i") };
   }
 
   if (filters.clothingType) {
-    query.clothingType = {
-      $regex: new RegExp(`^${filters.clothingType}$`, "i")
-    };
+    query.clothingType = { $regex: new RegExp(`^${filters.clothingType}$`, "i") };
   }
 
-if (filters.brand) {
+  if (filters.brand) {
     query.brand = { $regex: new RegExp(`^${filters.brand}$`, "i") };
   }
 
@@ -88,9 +116,7 @@ if (filters.brand) {
   }));
 }
 
-// ============================
 // GET PRODUCT BY ID
-// ============================
 async function getProductById(productId) {
   const product = await Product.findOne({
     productId: { $regex: new RegExp(`^${productId}$`, "i") },
@@ -107,7 +133,7 @@ async function getProductById(productId) {
     id: product.productId,
     name: product.name,
     price: product.price,
-    description: product.description,
+    description: p.description,
     image_url: product.imageUrl,
     gender: product.gender,
     clothing_type: product.clothingType,
@@ -117,9 +143,7 @@ async function getProductById(productId) {
   };
 }
 
-// ============================
 // GET CLOTHING TYPES BY GENDER
-// ============================
 async function getClothingTypesByGender(gender) {
   const types = await Product.distinct("clothingType", {
     gender: { $regex: new RegExp(`^${gender}$`, "i") },
@@ -132,19 +156,15 @@ async function getClothingTypesByGender(gender) {
   }));
 }
 
-// ============================
 // GET CLOTHING PRODUCTS
-// ============================
 async function getClothingProducts(gender, clothingType) {
   const products = await Product.find({
     gender: { $regex: new RegExp(`^${gender}$`, "i") },
-    clothingType: {
-      $regex: new RegExp(`^${clothingType}$`, "i")
-    },
+    clothingType: { $regex: new RegExp(`^${clothingType}$`, "i") },
     isActive: true
   })
     .sort({ name: 1 })
-    .populate("category", "name") // ✅ optimized (no manual query)
+    .populate("category", "name") 
     .lean();
 
   return products.map((p) => ({
@@ -161,13 +181,12 @@ async function getClothingProducts(gender, clothingType) {
   }));
 }
 
-// ============================
-// EXPORTS
-// ============================
 module.exports = {
   getCategories,
+  searchProducts,
   getProductsByCategoryName,
   getProductById,
   getClothingTypesByGender,
   getClothingProducts
 };
+

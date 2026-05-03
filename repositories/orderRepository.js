@@ -38,15 +38,18 @@ async function markOrderPaid(orderCode) {
   ).populate("user");
 
   if (!order) return null;
+  return order.toObject({ getters: true });
 
-  return {
-    order_code: order.orderCode,
-    total: order.total,
-    phone: order.user.phone
-  };
+}
+
+async function getOrderByCode(orderCode) {
+  const order = await Order.findOne({ orderCode }).populate('user').lean();
+  if (!order) return null;
+  return order;
 }
 
 module.exports = {
   createOrderFromCart,
-  markOrderPaid
+  markOrderPaid,
+  getOrderByCode
 };
