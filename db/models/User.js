@@ -47,6 +47,23 @@ const userSchema = new mongoose.Schema({
   type: String,
   default: null
 },
+preferences: [
+  {
+    category: {
+      type: String
+    },
+    subcategory: {
+      type: String
+    },
+    viewedAt: {
+      type: Date,
+      default: Date.now
+    }
+  }
+]
+
 });
+
+
 
 module.exports = mongoose.model("User", userSchema);

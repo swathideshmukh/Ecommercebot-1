@@ -4,6 +4,7 @@ const orderService = require("../services/orderService");
 const wishlistRepository = require("../repositories/wishlistRepository");
 const User = require("../db/models/User");
 const fetch = require("node-fetch");
+const userPreferenceRepository = require("../repositories/userPreferenceRepository");
 const { analyzeImage } = require("../services/imageAIService");
 const { generateInvoice } = require("../services/invoiceService");
 const processedMessages = new Set();
@@ -166,7 +167,7 @@ if (checkoutUser?.checkoutStep === "WAITING_REFERRAL_CODE") {
 
 if (text.startsWith("booktype_")) {
   const bookType = input.replace("BOOKTYPE_", "");
-  return sendProducts(phone, bookType);
+  return sendPersonalizedProducts(phone, "Books", bookType);
 }
 
 if (text === "category_clothing") {
@@ -1185,6 +1186,60 @@ Choose an option:`,
     ]
   );
 }
+
+async function sendPersonalizedProducts(phone, category, subcategory) {
+  await userPreferenceRepository.addPreference(phone, category, subcategory);
+
+  const preference = await userPreferenceRepository.getTopPreference(
+    phone,
+    category,
+    subcategory
+  );
+
+  const products = await productRepository.getPersonalizedProducts(
+    preference.category,
+    preference.subcategory,
+    3
+  );
+
+  if (!products.length) {
+    return sendWhatsAppMessage(phone, "No recommended products found.");
+  }
+
+  for (const product of products) {
+    if (product.image_url && product.image_url.startsWith("http")) {
+      await sendImageMessage(phone, product.image_url, product.name);
+      await delay(500);
+    }
+
+    const details = `🛍️ *${product.name}*
+
+💰 Price: ${money(product.price)}
+🆔 Product ID: ${product.id}
+📂 Category: ${product.category}
+🏷️ Type: ${product.clothing_type || product.clothingType || "General"}
+
+📝 ${product.description || "High quality product."}`;
+
+    await sendWhatsAppMessage(phone, details);
+    await delay(500);
+
+    await sendButtonMessage(phone, "Choose action:", [
+      { id: `ADD_${product.id}`, title: "🛒 Add" },
+      { id: `PRODUCT_${product.id}`, title: "👁 Details" },
+      { id: `WISH_${product.id}`, title: "❤️ Wish" }
+    ]);
+
+    await delay(700);
+  }
+
+  return sendButtonMessage(phone, "Need anything else?", [
+    { id: "MENU_BROWSE", title: "Categories" },
+    { id: "MENU_CART", title: "View Cart" },
+    { id: "MENU_CHECKOUT", title: "Checkout" }
+  ]);
+}
+
 
 async function sendProducts(phone, category) {
   const products = await productRepository.getProductsByCategoryName(category);
