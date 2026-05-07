@@ -181,12 +181,39 @@ async function getClothingProducts(gender, clothingType) {
   }));
 }
 
+async function getPersonalizedProducts(category, subcategory, limit = 3) {
+  const query = {
+    isActive: true
+  };
+
+  if (category) {
+    query.category = { $regex: new RegExp(`^${category}$`, "i") };
+  }
+
+  if (subcategory) {
+    query.clothingType = { $regex: new RegExp(`^${subcategory}$`, "i") };
+  }
+
+  const products = await Product.find(query)
+    .sort({ price: 1 })
+    .limit(limit);
+
+  return products.map(formatProduct);
+}
+
 module.exports = {
   getCategories,
   searchProducts,
   getProductsByCategoryName,
   getProductById,
   getClothingTypesByGender,
+<<<<<<< Updated upstream
   getClothingProducts
 };
 
+=======
+  getClothingProducts,
+  searchProducts,
+  getPersonalizedProducts
+};
+>>>>>>> Stashed changes
